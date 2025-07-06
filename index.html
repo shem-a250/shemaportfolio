@@ -8,6 +8,14 @@
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+  <!-- EmailJS -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("NmEpOLpzLEmVuiDCE"); // Replace with your actual public key
+    })();
+  </script>
+
   <style>
     :root {
       --bg-color: linear-gradient(to right, #0f2027, #203a43, #2c5364);
@@ -203,7 +211,6 @@
       }
     }
 
-    /* New Details box styles */
     .details-box {
       background-color: var(--box-bg);
       border: 1px solid var(--accent-color);
@@ -225,15 +232,18 @@
 
   <header>
     <div class="avatar">
-  <a href="Picsart_25-07-03_20-12-19-934.png" target="_blank">
-    <img src="Picsart_25-07-03_20-12-19-934.png" alt="Profile Avatar" />
-  </a>
-</div>
+      <a href="Picsart_25-07-03_20-12-19-934.png" target="_blank">
+        <img src="Picsart_25-07-03_20-12-19-934.png" alt="Profile Avatar" />
+      </a>
+    </div>
     <h1>Shema Jleopord</h1>
     <p>Futuristic Web Developer & Digital Innovator</p>
-  </header><blockquote style="font-style: italic; margin-top: 15px; color: var(--yellow-accent); text-shadow: 0 0 6px var(--pink-accent); text-align: center;">
-  "Don't watch the clock; do what it does. Move on."
-</blockquote>
+  </header>
+
+  <blockquote style="font-style: italic; margin-top: 15px; color: var(--yellow-accent); text-shadow: 0 0 6px var(--pink-accent); text-align: center;">
+    "Don't watch the clock; do what it does. Move on."
+  </blockquote>
+
   <section data-aos="fade-up">
     <h2>About Me</h2>
     <p>I build futuristic digital experiences, smart platforms, and glowing UIs. Passionate about code, design, and digital impact.</p>
@@ -241,17 +251,16 @@
       <button>📄 Download CV</button>
     </a>
     <a class="cv-button" href="CV.html" target="_blank" rel="noopener noreferrer" style="margin-left: 10px;">
-      <button href="CV.html">👁️ View CV</button>
+      <button>👁️ View CV</button>
     </a>
   </section>
-  
-  <!-- New Details Section -->
+
   <section data-aos="fade-up">
     <h2>Details</h2>
     <div class="details-box">
       <p><strong>Name:</strong> Shema Karambizi Jleopord</p>
       <p><strong>Age:</strong> 16</p>
-      <p><strong>Professional:</strong>  Front-end Developer, Digital Innovator, Music Producer</p>
+      <p><strong>Professional:</strong> Front-end Developer, Digital Innovator, Music Producer</p>
       <p><strong>Nationality:</strong> Rwandan</p>
       <p><strong>Email:</strong> shemajleopord01@gmail.com</p>
     </div>
@@ -295,25 +304,21 @@
     </div>
   </section>
 
-  <!-- Contact Me Button to show form -->
   <section data-aos="fade-up" style="max-width: 1000px; margin: 30px auto;">
     <button id="show-form-btn" style="padding: 10px 25px; border-radius: 30px; border: 2px solid var(--accent-color); background: transparent; color: var(--accent-color); cursor: pointer; box-shadow: 0 0 10px var(--accent-color);">
       ✉️ Contact Me
     </button>
   </section>
 
-  <!-- Hidden Contact Form -->
   <section class="contact-form" data-aos="fade-up" style="max-width: 1000px; margin: 30px auto; display: none;">
     <div class="form-box">
-      <form action="https://formspree.io/f/your-form-id" method="POST">
+      <form id="contact-form">
         <input type="text" placeholder="Your Name" name="name" required />
-        <input type="email" placeholder="Your Email" name="_replyto" required />
-        <textarea rows="5" placeholder="Your Message" name="message"></textarea>
+        <input type="email" placeholder="Your Email" name="email" required />
+        <textarea rows="5" placeholder="Your Message" name="message" required></textarea>
         <div style="display: flex; align-items: center; margin-top: 15px;">
           <button type="submit">🚀 Send Message</button>
-          <button type="button" id="cancel-btn" style="margin-left: 10px; padding: 10px 25px; border-radius: 30px; border: 2px solid var(--accent-color); background: transparent; color: var(--accent-color); cursor: pointer; box-shadow: 0 0 10px var(--accent-color);">
-            ❌ Cancel
-          </button>
+          <button type="button" id="cancel-btn" style="margin-left: 10px;">❌ Cancel</button>
         </div>
       </form>
     </div>
@@ -330,14 +335,12 @@
   </footer>
 
   <script>
-    // Theme toggle with icon switch
     const toggleBtn = document.getElementById("theme-toggle");
     toggleBtn.addEventListener("click", () => {
       document.body.classList.toggle("light");
       toggleBtn.textContent = document.body.classList.contains("light") ? "☀️ Theme" : "🌙 Theme";
     });
 
-    // Animate progress bars when in view
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -353,7 +356,6 @@
       observer.observe(bar);
     });
 
-    // Contact form toggle
     const showFormBtn = document.getElementById('show-form-btn');
     const contactForm = document.querySelector('.contact-form');
     const cancelBtn = document.getElementById('cancel-btn');
@@ -367,10 +369,25 @@
       contactForm.style.display = 'none';
       showFormBtn.style.display = 'inline-block';
     });
+
+    // EMAILJS SUBMIT HANDLER
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      emailjs.sendForm("service_o0zp5fo", "template_5wtdyjj", this)
+        .then(() => {
+          alert("✅ Message sent!");
+          contactForm.style.display = "none";
+          showFormBtn.style.display = "inline-block";
+          this.reset();
+        }, (error) => {
+          alert("❌ Failed to send message. Please try again.");
+          console.error(error);
+        });
+    });
   </script>
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>AOS.init();</script>
 
 </body>
-  </html>
+</html>
