@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shema Jleopord | Futuristic Portfolio</title>
+  <meta name="description" content="Shema Jleopord – Futuristic Web Developer, UI/UX Designer, and Digital Innovator." />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-color: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      --accent-color: #00ffff;
+      --text-color: #ffffff;
+      --box-bg: rgba(255, 255, 255, 0.03);
+    }
+
+    body.light {
+      --bg-color: linear-gradient(to left, #e0eafc, #a8ffdf96);
+      --accent-color: #00859c;
+      --text-color: #000000;
+      --box-bg: rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      padding: 20px;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    header h1 {
+      font-size: 48px;
+      color: var(--accent-color);
+      text-shadow: 0 0 15px var(--accent-color);
+    }
+
+    header p {
+      font-size: 20px;
+      opacity: 0.8;
+    }
+
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 20px auto;
+      border: 3px solid var(--accent-color);
+      box-shadow: 0 0 20px var(--accent-color);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: 2px solid var(--accent-color);
+      color: var(--accent-color);
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--accent-color);
+      transition: background 0.3s;
+      z-index: 1000;
+    }
+
+    .toggle-btn:hover {
+      background: var(--accent-color);
+      color: #000;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 30px auto;
+      background-color: var(--box-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+    }
+
+    h2 {
+      color: var(--accent-color);
+      font-size: 28px;
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px var(--accent-color);
+    }
+
+    .skills {
+      margin-top: 20px;
+    }
+
+    .skill {
+      margin-bottom: 20px;
+    }
+
+    .skill-name {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: #ccc;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background: var(--accent-color);
+      transition: width 1.2s ease-in-out;
+    }
+
+    .projects, .contact-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .project-box, .form-box {
+      background-color: rgba(0, 255, 255, 0.05);
+      border: 1px solid var(--accent-color);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+    button {
+      padding: 10px 25px;
+      margin-top: 15px;
+      background-color: transparent;
+      border: 2px solid var(--accent-color);
+      color: var(--accent-color);
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--accent-color);
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: var(--accent-color);
+      color: #000;
+    }
+
+    .cv-button {
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 14px;
+      opacity: 0.6;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid var(--accent-color);
+      border-radius: 10px;
+      background: transparent;
+      color: var(--text-color);
+      resize: none;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 36px; }
+      section { padding: 20px; }
+      .toggle-btn { top: 10px; right: 10px; }
+      .avatar {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    /* New Details box styles */
+    .details-box {
+      background-color: var(--box-bg);
+      border: 1px solid var(--accent-color);
+      border-radius: 15px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: 30px auto;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+      color: var(--text-color);
+      font-size: 18px;
+      line-height: 1.6;
+      text-shadow: 0 0 5px var(--accent-color);
+    }
+  </style>
+</head>
+<body>
+
+  <button id="theme-toggle" class="toggle-btn">🌙 Theme</button>
+
+  <header>
+    <div class="avatar">
+      <img src="/storage/emulated/0/Code project/Picsart_25-07-03_20-12-19-934.png" alt="Profile Avatar" />
+    </div>
+    <h1>Shema Jleopord</h1>
+    <p>Futuristic Web Developer & Digital Innovator</p>
+  </header><blockquote style="font-style: italic; margin-top: 15px; color: var(--yellow-accent); text-shadow: 0 0 6px var(--pink-accent); text-align: center;">
+  "Don't watch the clock; do what it does. Move on."
+</blockquote>
+  <section data-aos="fade-up">
+    <h2>About Me</h2>
+    <p>I build futuristic digital experiences, smart platforms, and glowing UIs. Passionate about code, design, and digital impact.</p>
+    <a class="cv-button" href="/storage/emulated/0/Code project/Shema_Jleopord_CV.pdf" download>
+      <button>📄 Download CV</button>
+    </a>
+    <a class="cv-button" href="CV.html" target="_blank" rel="noopener noreferrer" style="margin-left: 10px;">
+      <button href="CV.html">👁️ View CV</button>
+    </a>
+  </section>
+  
+  <!-- New Details Section -->
+  <section data-aos="fade-up">
+    <h2>Details</h2>
+    <div class="details-box">
+      <p><strong>Name:</strong> Shema Karambizi Jleopord</p>
+      <p><strong>Age:</strong> 16</p>
+      <p><strong>Professional:</strong>  Front-end Developer, Digital Innovator, Music Producer</p>
+      <p><strong>Nationality:</strong> Rwandan</p>
+      <p><strong>Email:</strong> shemajleopord01@gmail.com</p>
+    </div>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="skill">
+        <div class="skill-name">HTML / CSS / JS</div>
+        <div class="progress-bar"><div class="progress" style="width: 90%"></div></div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">React / Node.js</div>
+        <div class="progress-bar"><div class="progress" style="width: 80%"></div></div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">UI/UX Design</div>
+        <div class="progress-bar"><div class="progress" style="width: 85%"></div></div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Python / Networking</div>
+        <div class="progress-bar"><div class="progress" style="width: 90%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project-box">
+        <h3>e-Hub Platform</h3>
+        <p>Futuristic web ecosystem for connected apps.</p>
+        <button onclick="window.alert(' Sorry. This page is currently unavailable')">🔗 View Project</button>
+      </div>
+      <div class="project-box">
+        <h3>Neon Portfolio</h3>
+        <p>A glowing, responsive personal profile site.</p>
+        <button onclick="location.reload()">🔗 View Project</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Me Button to show form -->
+  <section data-aos="fade-up" style="max-width: 1000px; margin: 30px auto;">
+    <button id="show-form-btn" style="padding: 10px 25px; border-radius: 30px; border: 2px solid var(--accent-color); background: transparent; color: var(--accent-color); cursor: pointer; box-shadow: 0 0 10px var(--accent-color);">
+      ✉️ Contact Me
+    </button>
+  </section>
+
+  <!-- Hidden Contact Form -->
+  <section class="contact-form" data-aos="fade-up" style="max-width: 1000px; margin: 30px auto; display: none;">
+    <div class="form-box">
+      <form action="https://formspree.io/f/your-form-id" method="POST">
+        <input type="text" placeholder="Your Name" name="name" required />
+        <input type="email" placeholder="Your Email" name="_replyto" required />
+        <textarea rows="5" placeholder="Your Message" name="message"></textarea>
+        <div style="display: flex; align-items: center; margin-top: 15px;">
+          <button type="submit">🚀 Send Message</button>
+          <button type="button" id="cancel-btn" style="margin-left: 10px; padding: 10px 25px; border-radius: 30px; border: 2px solid var(--accent-color); background: transparent; color: var(--accent-color); cursor: pointer; box-shadow: 0 0 10px var(--accent-color);">
+            ❌ Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <div style="text-align:center; margin-top:40px;">
+    <a href="https://github.com/shem-a250" target="_blank" aria-label="GitHub"><i class="fab fa-github fa-2x" style="margin: 10px; color: var(--accent-color);"></i></a>
+    <a href="https://instagram.com/Shem.a_250" target="_blank" aria-label="Instagram"><i class="fab fa-instagram fa-2x" style="margin: 10px; color: var(--accent-color);"></i></a>
+    <a href="https://mail.google.com/mail/u/shemajleopord01@gmail.com/#inbox" aria-label="Email"><i class="fas fa-envelope fa-2x" style="margin: 10px; color: var(--accent-color);"></i></a>
+  </div>
+
+  <footer>
+    &copy; 2025 Shema Jleopord — Designed in the future, coded with passion.
+  </footer>
+
+  <script>
+    // Theme toggle with icon switch
+    const toggleBtn = document.getElementById("theme-toggle");
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      toggleBtn.textContent = document.body.classList.contains("light") ? "☀️ Theme" : "🌙 Theme";
+    });
+
+    // Animate progress bars when in view
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const progress = entry.target;
+          progress.style.width = progress.getAttribute('data-width');
+        }
+      });
+    }, { threshold: 0.7 });
+
+    document.querySelectorAll('.progress').forEach(bar => {
+      bar.setAttribute('data-width', bar.style.width);
+      bar.style.width = '0';
+      observer.observe(bar);
+    });
+
+    // Contact form toggle
+    const showFormBtn = document.getElementById('show-form-btn');
+    const contactForm = document.querySelector('.contact-form');
+    const cancelBtn = document.getElementById('cancel-btn');
+
+    showFormBtn.addEventListener('click', () => {
+      contactForm.style.display = 'grid';
+      showFormBtn.style.display = 'none';
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      contactForm.style.display = 'none';
+      showFormBtn.style.display = 'inline-block';
+    });
+  </script>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init();</script>
+
+</body>
+  </html>
